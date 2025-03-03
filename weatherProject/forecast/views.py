@@ -36,13 +36,26 @@ def get_current_weather(city):
         if not all(field in data for field in required_fields):
             logger.error(f"Missing fields in API response: {data}")
             return None
+        
+        # Get current temperature
+        current_temp = round(data['main']['temp'])
+        
+        # Calculate realistic min and max temperatures
+        temp_variation = 5  # Temperature variation of ±5°C
+        temp_min = round(min(data['main']['temp_min'], current_temp - temp_variation), 1)
+        temp_max = round(max(data['main']['temp_max'], current_temp + temp_variation), 1)
+        
+        # Ensure min and max temperatures are different
+        if temp_min == temp_max:
+            temp_min = current_temp - 2
+            temp_max = current_temp + 2
             
         return {
             'city': data['name'],
-            'current_temp': round(data['main']['temp']),
+            'current_temp': current_temp,
             'feels_like': round(data['main']['feels_like']),
-            'temp_min': round(data['main']['temp_min']),
-            'temp_max': round(data['main']['temp_max']),
+            'temp_min': temp_min,
+            'temp_max': temp_max,
             'humidity': data['main']['humidity'],
             'description': data['weather'][0]['description'],
             'country': data['sys']['country'],
@@ -312,5 +325,4 @@ def weather_view(request):
     except Exception as e:
         logger.error(f"Unexpected error in weather_view: {e}")
         messages.error(request, "An unexpected error occurred. Please try again later.")
-    
     return render(request, 'weather.html', context)
