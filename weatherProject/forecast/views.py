@@ -16,7 +16,7 @@ from django.contrib import messages
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-API_KEY = '9f39358739a87c32ca64c4a33f26f292'
+API_KEY = 'YOUR_API_KEY'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/'
 
 # 1) Fetch current data from the API with error handling
