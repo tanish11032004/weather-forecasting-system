@@ -85,12 +85,6 @@ Weather-Forecasting-System/
 - Add **user authentication** and profile management.
 - Enhance **UI/UX** for better usability.
 
-## 🤝 Contributing
-1. Fork the repository.
-2. Create a new branch (`feature-name`).
-3. Commit your changes.
-4. Push to the branch and create a **Pull Request**.
-
 ## 📄 License
 This project is licensed under the **MIT License**.
 
